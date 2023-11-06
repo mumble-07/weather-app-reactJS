@@ -8,5 +8,12 @@
 > [Open Weather Map](https://home.openweathermap.org)
 
 ---------------------------------
+## SCREENSHOTS
+
+![Alt text](image.png)
+
+![Alt text](image-1.png)
+
+----------------------
 
 #### mumble ^_^ 
