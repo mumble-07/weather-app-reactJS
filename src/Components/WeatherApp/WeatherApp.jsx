@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './WeatherApp.css';
 
 import search_icon from '../Assets/search.png';
@@ -13,6 +13,7 @@ import wind_icon from '../Assets/wind.png';
 export const WeatherApp = () => {
 
   let api_key = '612d22327ce57af3d51790d78063de0f';
+  const [wicon, setWicon] = useState(cloudy_icon);
 
   const search = async () => {
     const element = document.getElementsByClassName('cityInput');
@@ -31,9 +32,27 @@ export const WeatherApp = () => {
     const location = document.getElementsByClassName('weather-location');
 
     humidity[0].innerHTML = data.main.humidity + '%';
-    wind[0].innerHTML = data.wind.speed + 'km/h';
-    temperature[0].innerHTML = data.main.temp + '&#176;C';
+    wind[0].innerHTML = Math.floor(data.wind.speed) + 'km/h';
+    temperature[0].innerHTML = Math.floor(data.main.temp) + '&#176;C';
     location[0].innerHTML = data.name;
+
+    if (data.weather[0].icon === '01d' || data.weather[0].icon === '01n') {
+      setWicon(clear_icon);
+    } else if (data.weather[0].icon === '02d' || data.weather[0].icon === '02n') {
+      setWicon(cloudy_icon);
+    } else if (data.weather[0].icon === '03d' || data.weather[0].icon === '03n') {
+      setWicon(drizzle_icon);
+    } else if (data.weather[0].icon === '04d' || data.weather[0].icon === '04n') {
+      setWicon(drizzle_icon);
+    } else if (data.weather[0].icon === '09d' || data.weather[0].icon === '09n') {
+      setWicon(rain_icon);
+    } else if (data.weather[0].icon === '10d' || data.weather[0].icon === '10n') {
+      setWicon(rain_icon);
+    } else if (data.weather[0].icon === '13d' || data.weather[0].icon === '13n') {
+      setWicon(snow_icon);
+    } else {
+      setWicon(clear_icon);
+    }
 
 
   }
@@ -47,7 +66,7 @@ export const WeatherApp = () => {
         </div>
       </div>
       <div className='weather-image'>
-        <img src={cloudy_icon} alt='' />
+        <img src={wicon} alt='' />
       </div>
       <div className="weather-temp">24&#176;C</div>
       <div className="weather-location">London</div>
